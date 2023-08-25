@@ -1,0 +1,18 @@
+
+<a href="/demo">add</a>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of  Employeemaster">
+        <td>{{ user.EmployeeCode }}</td>
+        <td>{{ user.EmployeeType }}</td>
+        <td>{{ user.EmployeeName}}</td>
+      </tr>
+    </tbody>
+  </table>

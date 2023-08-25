@@ -1,0 +1,82 @@
+
+<mat-toolbar class="px-5 py-3">
+    <span>EMPLOYEE LIST</span>
+
+  
+  </mat-toolbar>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field class="example-full-width" appearance="outline" >
+                <input matInput matInput required autocomplete="off" placeholder="Search...">
+              </mat-form-field>
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+            <button  mat-mini-fab matTooltip="Add Employee" (click)="onCreate()" ><i class="fa-solid fa-plus h4"></i></button>
+        </div>
+        <div class="col-md-12 mt-3">
+            <table  class="table table-head-fixed table-hover table-striped" mat-table [dataSource]="dataSource"  matSort>
+
+                <ng-container matColumnDef="EmployeeDetails">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      EMPLOYEE NAME
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.EmployeeModel.EmployeeName}}</td>
+                  </ng-container>
+                <ng-container matColumnDef="Designation">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    DESIGNATION
+                  </th>
+                  <td mat-cell *matCellDef="let row">{{row.EmployeeModel.Designation}}</td>
+                </ng-container>
+        
+                <ng-container matColumnDef="DOB">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                   DOB
+                  </th>
+                  <td mat-cell *matCellDef="let row">{{row.EmployeeModel.DateofBrith | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    TYPE
+                  </th>
+                  <td mat-cell *matCellDef="let row">{{row.EmployeeModel.EmployeeType}}</td>
+                </ng-container>
+                <ng-container matColumnDef="DOJ">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                   DOJ
+                  </th>
+                  <td mat-cell *matCellDef="let row">{{row.EmployeeModel.DateofJoining | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Actions">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                   ACTIONS
+                  </th>
+                  <td mat-cell *matCellDef="let row" class="p-2" >
+                   <button class="btn" (click)="Onedit(row)" [disabled]="isEditButtonDisabled"> <i class="fa-solid fa-pen-to-square"></i></button>
+                   <button  class="delete" (click)="toggleEditButton()" matTooltip="Void"    ><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </ng-container>
+               
+               
+        
+             
+        
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="5">
+                 
+                  </td>
+                </tr>
+              </table>
+        
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,58 @@
+mat-toolbar{
+    background-color: #7E57C2 !important;
+    color: #ffff;
+    letter-spacing: 1PX;
+}
+
+mat-form-field{
+    width:100% !important;
+}
+button{
+    background-color: #7E57C2 !important;
+    color: #ffff;
+}
+.table thead th {
+    background-color: #dde3ea;
+    vertical-align: inherit;
+    border-style: groove;
+  }
+table tr th{
+    padding: 20px 30px;
+}
+
+mat-checkbox::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;margin-top: 30px;color: #7E57C2 !important}
+
+.grid{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table2{
+    margin-left: 50px;
+}
+.table th{
+    background-color: #dde3ea;
+    vertical-align: inherit;
+    border-style: groove;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.table td{
+    text-align: center;
+    text-transform: capitalize;
+}
+.table th i{
+    font-size: 20px;
+    cursor: pointer;
+}
+.delete{
+    background-color: rgb(223, 55, 55) !important;
+    color: #fff !important;
+    outline: none !important;
+    border: none !important;
+    padding: 8px 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }

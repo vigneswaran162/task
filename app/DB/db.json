@@ -1,0 +1,38 @@
+{
+  "EmployeeType": [
+    {
+      "employeeType": "Temporary",
+      "id": 1
+    },
+    {
+      "employeeType": "Permanent",
+      "id": 3
+    }
+  ],
+  "DesignationType": [
+    {
+      "DesignationType": "Staff",
+      "id": 1
+    },
+    {
+      "DesignationType": "Manager",
+      "id": 2
+    }
+  ],
+  "SpouseType": [
+    {
+      "SpouseType": "HouseWife",
+      "id": 1
+    }
+  ],
+  "DependentType": [
+    {
+      "Dependentype": "Son",
+      "id": 1
+    },
+    {
+      "Dependentype": "Daughter",
+      "id": 2
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    --mdc-checkbox-state-layer-size: 80px;
+
+}
+mat-form-field{
+    width:100% !important;
+}
+mat-toolbar{
+    background-color: #7E57C2 !important;
+    color: #ffff;
+    letter-spacing: 1PX;
+}
+mat-toolbar span{
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+.btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btns button{
+    margin-left: 10px;
+}
+.submit{
+    background-color: #7E57C2 !important;
+    color: #ffff !important;
+}
+.clear{
+    background-color: #000 !important;
+    color: #ffff !important;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+
+.box{
+    width:50%;
+    height: 50vh;
+   
+}
+.row{
+    width: 100%;
+    height: auto;
+   
+}
+
+.table thead th {
+    background-color: #dde3ea;
+    vertical-align: inherit;
+    border-style: groove;
+  }
+table tr th{
+    padding: 20px 30px;
+}
+
+mat-checkbox::ng-deep .mat-checkbox-inner-container {width: 30px;height: 30px;margin-top: 30px;color: #7E57C2 !important}
+
+.grid{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table2{
+    margin-left: 50px;
+}
+.table th{
+    background-color: #dde3ea;
+    vertical-align: inherit;
+    border-style: groove;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.table td{
+    text-align: center;
+    text-transform: capitalize;
+}
+.table th i{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn-tax{
+    border-radius: 50px !important;
+}
+.box-border{
+    border:  1px solid rgb(162, 160, 160);
+    border-radius: 5px;
+}
+legend{
+    font-size: 15px;
+}
+.border{
+    border-radius: 80px;
+}
+.cricle{
+    // width: 30px !important;
+    border-radius: 20px !important;
+}
+.back{
+    background-color: #fff !important;
+
+    color: #000 !important;
+}

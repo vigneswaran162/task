@@ -1,0 +1,33 @@
+<div class="container p-3">
+    <div class="row">
+        <h4 mat-dialog-title>ADD UOM</h4>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline"  >
+                    <mat-label>UOM Desc</mat-label>
+                    <input matInput required pattern="[A-Za-z0-9]*"   type="text" [(ngModel)]="model.uomdesc" 
+                    />
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline"  >
+                    <mat-label>UOM Code</mat-label>
+                    <input matInput required  pattern="[A-Za-z0-9]*"  type="text" [(ngModel)]="model.uomcode" 
+                    />
+                  </mat-form-field>
+            </div>
+            <div class="col-md-8">
+
+            </div>
+            
+          
+           <div class="col-md-2">
+            <button mat-button class="submit px-3" (click)="onSubmit()">SUBMIT</button>
+           
+           </div>
+           <div class="col-md-2">
+           
+                <button mat-raised-button color="warn" class="px-3" mat-dialog-close>CLOSE</button>
+           </div>
+    </div>
+</div>
+

@@ -1,0 +1,53 @@
+
+mat-toolbar{
+    background-color: #7E57C2 !important;
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+mat-toolbar span{
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+.row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h4{
+    letter-spacing: 1px;
+}
+
+.excel{
+    background-color: #20560E !important;
+    color: #dde3ea !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.report{
+    color: #dde3ea !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}
+.viewbtn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 95px;
+}
+
+.border{
+    border:  1px solid gainsboro;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px (rgba 0, 0,0,0.4);
+}
+.form-switch .form-check-input:checked {
+    background-color: #7E57C2;
+    box-shadow:  none !important;
+  }

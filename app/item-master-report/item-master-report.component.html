@@ -1,0 +1,68 @@
+<mat-toolbar class="py-4 px-5" color="primary">
+    <span>Item Master Report</span>
+</mat-toolbar>
+<div class="container-fluid">
+    <div class="row bordered">
+      
+        <div class="col-md-10 p-5  mx-5">
+          <div class="row border">
+            <div class="col-md-5 card p-3 mb-4" style="overflow-y: scroll;max-height: 300px;"  *ngIf="selectedOption === 'option2'">
+            <div class="mx-5">
+              <div class="form-check form-switch">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Select All</label>
+                  <input class="form-check-input"  [(ngModel)]="userSelectAll" (change)="selectAll('itemdesc')" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                </div>
+               
+              </div>
+              <div class="mx-5" *ngFor="let d of model.itemlist;let i ">
+                <div class="form-check form-switch">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">{{d.itemdescription}}</label>
+                    <input class="form-check-input" type="checkbox"  [(ngModel)]="d.isChecked" role="switch" id="flexSwitchCheckDefault" />
+                  </div>
+                 
+                </div>
+           
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-5 me-4"  *ngIf="selectedOption === 'option1'">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>From Date</mat-label>
+                            <input matInput type="date" [max]="MaxDate"  required  [(ngModel)]="model.FromDate"
+                         />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5" *ngIf="selectedOption === 'option1'">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>To Date</mat-label>
+                            <input matInput type="date" [max]="MaxDate" required  [(ngModel)]="model.ToDate"
+                         />
+                         
+                        </mat-form-field>
+                       
+                    </div>
+                    <div class="col-md-10 card p-4" >
+                
+                        <mat-radio-group aria-label="Select an option" [(ngModel)]="model.Type">
+                            <mat-radio-button value="AA" class="pe-5" (change)="showField('option1')">Date Wise </mat-radio-button>
+                            <mat-radio-button value="BB" (change)="showField('option2')">Item List Wise </mat-radio-button>
+                          </mat-radio-group>
+                      </div>
+                   </div>
+            </div>
+          </div>
+        </div>
+       
+    </div>
+</div>
+<div class="container">
+    <div class="row" >
+      <div class="col-md-12 mt-5" class="viewbtn">
+      <div>
+        <button  mat-raised-button (click)="onSubmit()" class="report" style="background-color: black;color: #fff;"><i class="fa-solid fa-eye"></i> View report</button>
+      </div>
+      <div>
+        <button  mat-raised-button (click)="onsubmit('report')" class="report" style="background-color: black;color: #fff;"><i class="fa-solid fa-eye"></i> report</button>      </div>
+      </div>
+    </div>
+   </div>

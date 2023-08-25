@@ -1,0 +1,555 @@
+<!-- <mat-toolbar class="px-5 py-3">
+    <span>EMPLOYEE MASTER</span>
+  </mat-toolbar> -->
+<div class="container p-5">
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>EMPLOYEE MASTER</h2>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+          <div class="col-md-3 btn-1">
+            <button  mat-mini-fab matTooltip="Add Employee" class="add" ><i class="fa-solid fa-plus h4"></i></button>
+            <!-- <button  mat-mini-fab matTooltip="Void" color="warn"><i class="fa-solid fa-trash"></i></button>
+            <button  mat-mini-fab matTooltip="View Employee" class="white"><i class="fa-solid fa-eye"></i></button> -->
+            <button  mat-mini-fab matTooltip="Clear Data"color="black"><i class="fa-solid fa-star"></i></button>
+          </div>
+        </div>
+      </div>
+     
+        <div class="col-md-4 card p-3">
+          <h3>Employee Details</h3>
+          
+            <mat-form-field  appearance="outline">
+                <mat-label>Employee Code</mat-label>
+                <input matInput type="text" [(ngModel)]="model.EmployeeModel.EmployeeCode" minlength="3" maxlength="8"      pattern="[a-zA-Z0-9-]*" required  >
+              </mat-form-field>
+              <mat-form-field appearance="outline" >
+                <mat-label>Employee Type</mat-label>
+                <mat-select  required  [(ngModel)]="model.EmployeeModel.EmployeeType"  (selectionChange)="getcode()" >
+                  <mat-option *ngFor="let type of emplytype" [value]="type.employeeType" >{{type.employeeType}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field  appearance="outline">
+                <mat-label>Employee Name</mat-label>
+                <input matInput type="text" minlength="3" maxlength="40" [(ngModel)]="model.EmployeeModel.EmployeeName" (change)="EmployeeName($event)" required  pattern="[A-Za-z0-9]*">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Date Of Brith</mat-label>
+                <input matInput [matDatepicker]="picker" [min]="mindate" [max]="maxdate" [(ngModel)]="model.EmployeeModel.DateofBrith">
+                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+             <mat-form-field appearance="outline" >
+              <mat-label>Designation</mat-label>
+              <mat-select  required  [(ngModel)]="model.EmployeeModel.Designation" >
+                <mat-option *ngFor="let type of dessignationdata" [value]="type.DesignationType">{{type.DesignationType}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Date Of Joining</mat-label>
+              <input matInput [matDatepicker]="jfd" [min]="joinmin" [max]="joinmax" [(ngModel)]="model.EmployeeModel.DateofJoining">
+               <mat-datepicker-toggle matSuffix [for]="jfd"></mat-datepicker-toggle>
+              <mat-datepicker #jfd></mat-datepicker>
+            </mat-form-field>
+
+              <div class="btn-1 row">
+                <div class="col-md-6">
+                  <button mat-raised-button  class="me-5 ms-3 add" data-bs-toggle="modal" data-bs-target="#Designation">Add Designation</button>
+
+                </div>
+                <div class="col-md-6">
+                  <button mat-raised-button  class="ms-4 px-4 black" data-bs-toggle="modal" data-bs-target="#EmployeeType">Add Type</button>
+
+                </div>
+              </div>
+
+        </div>
+        <div class="col-md-8 px-5">
+          <div class="row">
+            <div class="col-md-6 card p-2 ">
+              <h3>PERSONAL Details</h3>
+             <div class="row">
+             <div class="col-md-8">
+             <h4>Marriage</h4>
+             </div>
+             <div class="col-md-4">
+              <div class="switchToggle">
+                <input type="checkbox" id="switch" [(ngModel)]="model.EmployeeModel.isChecked" (change)="toggleInput($event)" >
+                <label for="switch">Toggle</label>
+            </div>
+             </div>
+             </div>
+             <div class="row pe-3">
+              <div class="col-md-8 ">
+                
+              <mat-form-field  appearance="outline">
+                <mat-label>Spouse</mat-label>
+                <input matInput type="text" [(ngModel)]="model.EmployeeModel.Spouse" [disabled]="!model.EmployeeModel.isChecked">
+              </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="row mt-2">
+                  <div class="col-md-6">
+                    <button mat-mini-fab matTooltip="Add" class="add"  (click)="AddChild()" [disabled]="!model.EmployeeModel.isChecked">
+                      <i class="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-6" >
+                 
+                   <button mat-mini-fab class="add" data-bs-toggle="modal" data-bs-target="#SpouseType" [disabled]="!model.EmployeeModel.isChecked">
+                    <i class="fa-solid fa-info"></i>
+                  </button>
+                  </div>
+                </div>
+              
+              </div>
+             </div>
+            
+              <div class="col-md-12">
+             <div class="row "  *ngFor="let name of model.PresonalDet; let i = index">
+              <div class="col-md-8">
+                <mat-form-field appearance="outline">
+                  <mat-label>Son/Daughter</mat-label>
+                  <input matInput [(ngModel)]="name.SonDaughter" placeholder="Enter a name">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-6">
+                    <button mat-mini-fab matTooltip="Remove" color="warn"  (click)="deletePersRow(i)">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" mat-mini-fab class="add"   [attr.data-bs-target]="'#DependentType'+i" data-bs-toggle="modal">
+                      <i class="fa-solid fa-info"></i>
+                    </button>                   
+                  </div>
+                </div>
+              
+              </div>
+             </div>
+            </div>
+            </div>
+            <div class="col-md-6 card p-3">
+              <div class="row">
+                <div class="col-md-9 mb-2">
+                  <h3>QUALIFICATION Details</h3>
+                </div>
+                <div class="col-md-3 mb-2">
+                  <button mat-mini-fab matTooltip="Add" class="add"  (click)="AddQualification()">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+                <div *ngFor="let Qua of model.qualification; let i = index" class="col-md-12">
+                 <div class="row">
+                  <div class="col-md-8">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Qualification {{i+1}}</mat-label>
+                      <input matInput [(ngModel)]="Qua.EduQualification" (blur)="onblurQualification($event,i)" >
+                    </mat-form-field>
+                   </div>
+                     
+                   <div class="col-md-4 mt-2">
+                   <div class="row">
+                    <div class="col-md-6">
+                      <button mat-mini-fab matTooltip="Remove" color="warn"  (click)="deleteRow(i)">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" mat-mini-fab class="add"   [attr.data-bs-target]="'#QualificationType'+i" data-bs-toggle="modal">
+                          <i class="fa-solid fa-info"></i>
+                        </button>
+                    </div>
+                   </div>
+                   </div>
+                 </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-12 card p-3 mt-3">
+                <div class="row">
+                <div class="col-md-8">
+                  <h3>Employee Uploads</h3>
+                </div>
+                <div class="col-md-4">
+                  <button disabled  mat-mini-fab matTooltip="Add Employee" class="add" ><i class="fa-solid fa-plus h4"></i></button>
+                </div>
+                <div class="col-md-12 upload-file" style="overflow-y: scroll;max-height: 300px;">
+                <div class="row">
+                  
+ 
+             
+         
+                  <div class="col-md-4">
+                    <input type="file" [(ngModel)]="model.Uploads.Photo"  id="photoupolad"(change)="displayImage($event)" hidden accept="image/jpeg">
+                    <label for="photoupolad" class="hoverable" >
+                      <img [src]="model.Uploads.Photo" >
+                      <div class="hover-text">Photo</div>
+                      <div class="background" ></div>
+                    </label>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <input type="file" [(ngModel)]="model.Uploads.MarriageCertificate "  id="doc"(change)="displayDocument($event)" hidden accept="application/pdf">
+                    <label for="doc" class="hoverable" >
+                      <iframe  [src]="model.Uploads.MarriageCertificate  | safe" frameborder="0"></iframe>
+
+                      <!-- <object [data]="model.Uploads.MarriageCertificate " type="application/pdf" width="100%" height="150"></object> -->
+                      <div class="hover-text">Upload Certificate</div>
+                      <div class="background" ></div>
+                    </label>
+                  </div>
+
+                    <!-- <div class="col-md-3" *ngFor="let u of model.EmployeeUpload; let i = index">
+                      <input type="file" [(ngModel)]="u.FileUpload" id="fileupolad{{i}}"(change)="fileURL($event, i)" (change)="onFileSelected($event)" hidden accept="application/pdf,image/jpeg">
+                      <label for="fileupolad{{i}}" class="hoverable" >
+                        <iframe  [src]="u.FileUpload" frameborder="0"></iframe>
+                        <div class="hover-text">Photo</div>
+                        <div class="background" ></div>
+                      </label>
+                    </div> -->
+                  
+                </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4 btngroup">
+              <button mat-raised-button color="primary" class="add" (click)="onSubmit()">ADD</button>
+              <!-- <button mat-raised-button  color="warn">VOID</button>
+              <button mat-raised-button>VIEW</button> -->
+              <button mat-raised-button  class="black" (click)="onClear()"  *ngIf=" Isupdate == false">CLEAR</button>
+              <button mat-raised-button  class="black" (click)="onCleardata()" *ngIf=" Isupdate == true">CLEAR</button>
+              <button mat-raised-button color="primary" class="add" (click)="onback()">Back</button>
+           
+            </div>
+       
+          </div>
+        </div>
+    </div>
+
+<!-- </div> -->
+
+
+
+
+
+<!-- EMPLOYEE TYPE -->
+<div class="modal fade" id="EmployeeType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 px-5" id="staticBackdropLabel">Add Employee Type</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-5">
+        <mat-form-field appearance="outline">
+          <mat-label>Employee Type</mat-label>
+          <input matInput type="text" [(ngModel)]="AddType" (blur)="onEmployeeTypeBlur($event)" required>
+        </mat-form-field>
+      </div>
+      <div class="modal-footer px-5">
+        <button type="button" class="px-5 black" mat-raised-button (click)="onSubmitType()" >SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- EMPLOYEE DESIGNATION -->
+<div class="modal fade" id="Designation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 px-5" id="staticBackdropLabel">Add Designation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-5">
+        <mat-form-field  appearance="outline">
+          <mat-label>Designation</mat-label>
+          <input matInput type="text" [(ngModel)]="des"   required (blur)="onEmployeeDesignationBlur($event)"  >
+        </mat-form-field>
+      </div>
+      <div class="modal-footer px-5">
+        <button type="button" class="px-5 add" mat-raised-button (click)="OnSubmitDes()"   >SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- SPOUSE DETAILS -->
+<div class="modal fade" id="SpouseType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="staticBackdropLabel">SPOUSE DETAILS</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field  appearance="outline">
+          <mat-label>Spouse Name</mat-label>
+          <input matInput type="text"   [value]="model.EmployeeModel.Spouse"   required   >
+        </mat-form-field>
+        <div class="col-md-12">
+          <mat-form-field appearance="outline" >
+            <mat-label>Spouse Type</mat-label>
+            <mat-select  required  [(ngModel)]="model.SpouseDet.SpouseType"  >
+              <mat-option *ngFor="let type of  SpouseTypeArray" [value]="type.SpouseType" >{{type.SpouseType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-6 p-2">
+            <button class="btn btn-dark w-100 py-2 mb-2" style="border-radius: 20px;" data-bs-target="#SpouseworkType" data-bs-toggle="modal">Type</button>
+          <mat-form-field appearance="outline">
+            <mat-label>Date Of Brith</mat-label>
+            <input matInput [matDatepicker]="sdob"  [max]="SDobmax" [(ngModel)]="model.SpouseDet.SpouseDOB" >
+             <mat-datepicker-toggle matSuffix [for]="sdob"></mat-datepicker-toggle>
+            <mat-datepicker #sdob></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date Of Wedding</mat-label>
+            <input matInput [matDatepicker]="swd"   [(ngModel)]="model.SpouseDet.SpouseWeeding" (dateChange)="validateWedding($event)"   >
+             <mat-datepicker-toggle matSuffix [for]="swd"></mat-datepicker-toggle>
+            <mat-datepicker  #swd ></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <div class="upload-certificate" style="border-radius: 30px;">
+              <input type="file" id="sfile" hidden accept="image/jpeg" [(ngModel)]="model.SpouseDet.SpouseImage" (change)="displaySpouseImage($event)" >
+              <label for="sfile" class="hoverable" >
+                 <img [src]="model.SpouseDet.SpouseImage" alt="">
+              
+                <div class="hover-text">Spouse Image</div>
+                <div class="background" ></div>
+              </label>
+            </div>
+          </div>
+          <mat-form-field  appearance="outline">
+            <mat-label>Contact No</mat-label>
+            <input matInput type="text"  pattern="[0-9]*"  maxlength="10"   [(ngModel)]="model.SpouseDet.SpouseContact" (blur)="validatephone($event)"  required   >
+          </mat-form-field>
+          <mat-form-field  appearance="outline">
+            <mat-label>Email ID</mat-label>
+            <input matInput type="email" [(ngModel)]="model.SpouseDet.SpouseEmail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" (blur)="validatemail($event)" required   >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button"  mat-raised-button  class="clear mx-3" (click)="OnClearSpouse()">Clear</button>
+        <button type="button"  mat-raised-button  class="black" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--DEPENDENT DETILS-->
+<div *ngFor="let Dep of model.DependentDet; let i = index" >
+  <div class="modal fade" [id]="'DependentType'+i"   data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="staticBackdropLabel">DEPENDENT DETAILS</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <mat-form-field  appearance="outline">
+            <mat-label>Dependent Name</mat-label>
+            <input matInput type="text"  [(ngModel)]="Dep.DependentName" readonly   required   >
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" >
+            <mat-label>Dependent Type</mat-label>
+            <mat-select  required  [(ngModel)]="Dep.DependentType"  >
+             
+              <mat-option *ngFor="let type of DependentTypeArray" [value]="type.Dependentype" >{{type.Dependentype}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <div class="row">
+            <div class="col-md-6 p-2">
+              <button class="btn btn-dark w-100 py-2 mb-2" style="border-radius: 20px;" data-bs-toggle="modal" data-bs-target="#Dependentmodaltype">Type</button>
+  
+              <mat-form-field   appearance="outline">
+              <mat-label>Date Of Brith</mat-label>
+              <input matInput [matDatepicker]="dobd"  [(ngModel)]="Dep.DateofBrith">
+               <mat-datepicker-toggle matSuffix [for]="dobd"></mat-datepicker-toggle>
+              <mat-datepicker  #dobd></mat-datepicker>
+            </mat-form-field>
+        
+         
+              <mat-form-field  appearance="outline">
+                <mat-label>Age</mat-label>
+                <input matInput type="number"  [(ngModel)]="Dep.Age"     required   >
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <div class="upload-certificate" style="border-radius: 30px;">
+                <input type="file" id="qfile{{ i }}"  [(ngModel)]="Dep.DependentPhoto"   hidden accept="image/*" (change)="displayDependentImage($event, i)" />
+                <label for="qfile{{ i }}" class="hoverable">
+                  <!-- Display uploaded image if available -->
+                  <img  [src]="Dep.DependentPhoto" alt="Dependent Photo" />
+                  <div class="hover-text">Upload Dependent Photo</div>
+                  <div class="background"></div>
+                </label>
+              </div>
+            </div>
+            <mat-form-field  appearance="outline">
+              <mat-label>Contact No</mat-label>
+              <input matInput type="text"    pattern="[0-9]*"  maxlength="10"  (blur)="validateDependentPhoneNumber($event,i)" [(ngModel)]="Dep.ContactNo"   required   >
+            </mat-form-field>
+            <mat-form-field  appearance="outline">
+              <mat-label>Email ID</mat-label>
+              <input matInput type="email" [(ngModel)]="Dep.EmailId" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" (blur)="validateDependentEmail($event,i)"
+               required   >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="modal-footer">
+        
+          <button type="button"  mat-raised-button  class="clear mx-3" (click)="OnClearDependt(i)">Clear</button>
+          <button type="button"  mat-raised-button  class="black" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- QUALIFICATUON DETAILS-->
+<div >
+  <div *ngFor="let QualiDet of model.QualificationDet; let i = index">    
+    <div class="modal fade" [id]="'QualificationType'+i" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
+     
+      <div class="modal-dialog">
+        <div class="modal-content" >
+          <div class="modal-header">
+            <h2 class="modal-title px-5" id="staticBackdropLabel">QUALIFICATION DETAILS</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4"   >
+    
+            <mat-form-field appearance="outline" >
+              <mat-label>Qualification Type</mat-label>
+              <mat-select  required   [(ngModel)]="QualiDet.QualificationType"  >
+                <mat-option value="10th"  >10th</mat-option>
+                <mat-option value="12th" >12th</mat-option>
+                <mat-option  value="Graduation">Graduation</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field  appearance="outline">
+              <mat-label>Name Of The Institution</mat-label>
+              <input matInput type="text"  [(ngModel)]="QualiDet.NameofIns"    required   >
+            </mat-form-field>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field  appearance="outline">
+                  <mat-label>Year Passing</mat-label>
+                  <input matInput type="text"  [(ngModel)]="QualiDet.YearPassing"   required   >
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field  appearance="outline">
+                  <mat-label>Grade</mat-label>
+                  <input matInput type="text"  [(ngModel)]="QualiDet.Grade"   required   >
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field  appearance="outline">
+              <mat-label>Subjects Offered</mat-label>
+              <input matInput type="text"  [(ngModel)]="QualiDet.SubjectOffered"   required   >
+            </mat-form-field>
+            <div class="row " style="display: flex;align-items: center;justify-content: center;">
+              <div class="col-md-6">
+                <div class="upload-certificate" style="border-radius: 30px;">
+                  <input type="file" id="qfile{{ i }}" hidden accept="application/pdf" (change)="displayQualiDocument($event, i)" />
+                  <label for="qfile{{ i }}" class="hoverable">
+  
+                    <iframe  [src]="QualiDet.document | safe" frameborder="0"></iframe>
+                    <div class="hover-text">Upload Certificate</div>
+                    <div class="background"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  mat-raised-button  class="clear mx-3" (click)=" onClearQualification(i)">Clear</button>
+            <button type="button"  mat-raised-button  class="black" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Spouse Type -->
+<div class="modal fade" id="SpouseworkType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Spouse Type</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field  appearance="outline">
+          <mat-label>Spouse Type</mat-label>
+          <input matInput type="text" [(ngModel)]="SpouseTYpe" (blur)="onBlurSpouseType($event)"   required   >
+        </mat-form-field>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  mat-raised-button (click)="OnsubmitSpouseType()" class="add mx-3" >SUBMIT</button>
+        <button type="button"  mat-raised-button  class="black" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Dependent Type -->
+<div class="modal fade" id="Dependentmodaltype" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dependent Type</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field  appearance="outline">
+          <mat-label>Dependent Type</mat-label>
+          <input matInput type="text" [(ngModel)]="DependentType" (blur)="onBlurDependentType($event)"    required   >
+        </mat-form-field>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  mat-raised-button (click)="OnsubmitDependentType()" class="add mx-3" >SUBMIT</button>
+        <button type="button"  mat-raised-button  class="black" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
